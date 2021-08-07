@@ -12,8 +12,8 @@ addons:
 before_script:
   - psql -c "create database testsystem;" -U postgres
   - sudo -u postgres psql -c "ALTER ROLE postgres WITH password 'super123'"
-services:
-  - postgresql
+#services:
+#  - postgresql
 #script:
 # - mvn clean install
 # - mvn test
