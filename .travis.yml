@@ -1,11 +1,11 @@
 language: java
-dist: trusty
+#dist: trusty
 jdk:
  - openjdk11
 #before_install:
 #  - chmod +x mvnw
 os:
-  - linux
+  - windows
 #sudo: enabled
 #addons:
 #  postgresql: "13.3"
