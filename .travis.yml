@@ -1,7 +1,7 @@
 language: java
 dist: trusty
-jdk:
- - openjdk11
+#jdk:
+# - openjdk11
 before_install:
   - chmod +x mvnw
 os:
@@ -10,12 +10,10 @@ sudo: enabled
 addons:
   postgresql: "13.3"
 before_script:
-  - psql -c "create database testsystem;" -U postgres
+  - psql -c "create database testsystem;" -U postgres -p 5433
   - sudo -u postgres psql -c "ALTER ROLE postgres WITH password 'super123'"
 services:
   - postgresql
-env:
- - POSTGRES_PORT: 5432
 #script:
 # - mvn clean install
 # - mvn test
