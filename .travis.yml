@@ -1,7 +1,7 @@
 language: java
 dist: trusty
 jdk:
- - oraclejdk16
+ - openjdk10
 before_install:
   - chmod +x mvnw
 os:
@@ -9,9 +9,6 @@ os:
 sudo: enabled
 addons:
   postgresql: "13.3"
-    apt:
-    packages:
-      - oracle-java16-installer
 before_script:
   - psql -c "create database testsystem;" -U postgres -p 5433
   - sudo -u postgres psql -c "ALTER ROLE postgres WITH password 'super123'"
@@ -21,5 +18,9 @@ install:
  - mvn -N io.takari:maven:wrapper
  - ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 script:
- - mvn clean install
- - mvn test
+script:
+  - jdk_switcher use openjdk10
+  - wget https://github.com/sormuras/bach/raw/master/install-jdk.sh
+  - chmod +x $TRAVIS_BUILD_DIR/install-jdk.sh
+  - export JAVA_HOME=$HOME/openjdk11
+  - $TRAVIS_BUILD_DIR/install-jdk.sh -F 11 --target $JAVA_HOME
