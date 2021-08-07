@@ -9,6 +9,9 @@ os:
 sudo: enabled
 addons:
   postgresql: "13.3"
+    apt:
+    packages:
+      - oracle-java16-installer
 before_script:
   - psql -c "create database testsystem;" -U postgres -p 5433
   - sudo -u postgres psql -c "ALTER ROLE postgres WITH password 'super123'"
