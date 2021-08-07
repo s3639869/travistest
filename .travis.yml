@@ -4,7 +4,7 @@ before_install:
 os:
   - linux
 #addons:
-  postgresql: '13.2'
+#  postgresql: '13.2'
 #env:
 #  global:
 #    - PGUSER=postgres
