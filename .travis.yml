@@ -5,7 +5,7 @@ os:
   - linux
 sudo: enabled
 addons:
-  postgresql: "9.5" // change "9.5" for your postgres specific version
+  postgresql: "13.3"
 before_script:
   - psql -c "create database testsystem;" -U postgres // your database name
   - sudo -u postgres psql -c "ALTER ROLE postgres WITH password 'super123'" // if your password is different from 'postgres` use that one here
