@@ -3,13 +3,13 @@ before_install:
   - chmod +x mvnw
 os:
   - linux
-addons:
+#addons:
   postgresql: '13.2'
-env:
-  global:
-    - PGUSER=postgres
-    - PGPASSWORD=super123
-    - PGPORT=5432
+#env:
+#  global:
+#    - PGUSER=postgres
+#    - PGPASSWORD=super123
+#    - PGPORT=5432
 before_script:
   - sudo psql -p 5432 -U postgres -c 'create database testsystem;'
 script:
