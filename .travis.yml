@@ -8,7 +8,14 @@ os:
   - linux
 sudo: enabled
 addons:
-  postgresql: "13.3"
+  postgresql: "11"
+  apt:
+    packages:
+    - postgresql-11
+    - postgresql-client-11
+env:
+  global:
+  - PGPORT=5433
 before_script:
   - psql -c "create database cosc2101;" -U postgres -p 5433
   - sudo -u postgres psql -c "ALTER ROLE postgres WITH password 'super123'"
