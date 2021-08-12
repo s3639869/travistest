@@ -2,10 +2,13 @@ package com.example.ordersystem.controller;
 
 import com.example.ordersystem.model.Account;
 import com.example.ordersystem.model.AccountRole;
+import com.example.ordersystem.model.Cart;
 import com.example.ordersystem.service.AccountService;
+import com.example.ordersystem.service.CartService;
 import lombok.AllArgsConstructor;
 import org.apache.coyote.Request;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -20,6 +23,8 @@ import java.util.List;
 @AllArgsConstructor
 public class RegistrationController {
     private AccountService accountService;
+    @Autowired
+    private CartService cartService;
     
     @Autowired
     public void setAccountService(AccountService accountService) {
@@ -30,6 +35,11 @@ public class RegistrationController {
     @RequestMapping(value="registration", method=RequestMethod.GET)
     public String getForm(ModelMap model){
         model.addAttribute("account", new Account());
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (!(auth instanceof AnonymousAuthenticationToken)) {
+            //If user is already logged in, redirect to home page
+            return "redirect:/";
+        }
         return "registration";
     }
 
@@ -41,10 +51,28 @@ public class RegistrationController {
         return "redirect:/login";
     }
 
-    @RequestMapping(value="user", method=RequestMethod.GET)
+    @RequestMapping(value="/", method=RequestMethod.GET)
     public String getWelcomePage(ModelMap model){
         model.addAttribute("account", new Account());
-        return "loggedin_index";
+        float cartSum = 0;
+        int cartQty = 0;
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (!(auth instanceof AnonymousAuthenticationToken)) {
+            //If the user is already logged in, update their top-right cart info
+            Account loggedInAcc = (Account)auth.getPrincipal();
+            Long userId = loggedInAcc.getId();
+
+            Account user = accountService.getAccountById(userId);
+            List<Cart> cartList = cartService.getAllCarts(user);
+
+            cartQty = cartList.size();
+            for (Cart cart : cartList) {
+                cartSum += cart.getSmallSum();
+            }
+        }
+        model.addAttribute("cartSum",cartSum);
+        model.addAttribute("cartQty",cartQty);
+        return "index";
     }
 
     @RequestMapping(value="user/update", method=RequestMethod.GET)

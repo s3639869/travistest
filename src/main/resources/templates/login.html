@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="zxx" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-security5">
 
 <head>
     <meta charset="UTF-8">
@@ -16,16 +17,18 @@
           rel="stylesheet">
 
     <!-- Css Styles -->
-    <link rel="stylesheet" href="../../css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="../../css/flaticon.css" type="text/css">
-    <link rel="stylesheet" href="../../css/barfiller.css" type="text/css">
-    <link rel="stylesheet" href="../../css/magnific-popup.css" type="text/css">
-    <link rel="stylesheet" href="../../css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="../../css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="../../css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="../../css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="../../css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="../../css/style.css" type="text/css">
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="css/flaticon.css" type="text/css">
+    <link rel="stylesheet" href="css/barfiller.css" type="text/css">
+    <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
+    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="css/custom.css" type="text/css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 </head>
 
 <body>
@@ -65,8 +68,11 @@
                     <li>ENG</li>
                 </ul>
             </li>
-            <li th:if="${#authorization.expression('!isAuthenticated()')}"><a href="/login">Log in</a> <span class="arrow_carrot-down"></span></li>
-            <li th:if="${#authorization.expression('isAuthenticated()')}"><a href="" sec:authentication="principal.firstName"></a> <span class="arrow_carrot-down"></span></li>
+            <li th:if="${#authorization.expression('!isAuthenticated()')}"><a href="/login">Log in</a> <span
+                    class="arrow_carrot-down"></span></li>
+            <li th:if="${#authorization.expression('isAuthenticated()')}"><a href=""
+                                                                             sec:authentication="principal.firstName"></a>
+                <span class="arrow_carrot-down"></span></li>
         </ul>
     </div>
 </div>
@@ -93,11 +99,16 @@
                                         <li>ENG</li>
                                     </ul>
                                 </li>
-                                <li th:if="${#authorization.expression('!isAuthenticated()')}"><a href="/login">Log in</a> <span class="arrow_carrot-down"></span></li>
-                                <li th:if="${#authorization.expression('isAuthenticated()')}"><a sec:authentication="principal.firstName"></a> <span class="arrow_carrot-down"></span>
+                                <li th:if="${#authorization.expression('!isAuthenticated()')}"><a href="/login">Log
+                                    in</a> <span class="arrow_carrot-down"></span></li>
+                                <li th:if="${#authorization.expression('isAuthenticated()')}"><a
+                                        sec:authentication="principal.firstName"></a> <span
+                                        class="arrow_carrot-down"></span>
                                     <ul style="width: 180px;">
-                                        <li><a class="update" href="/user/update" style="color:white; display:block">Update Account</a></li>
-                                        <li><a class="logout" href="/logout" style="color:white" target="_blank">Logout</a>
+                                        <li><a class="update" href="/user/update" style="color:white; display:block">Update
+                                            Account</a></li>
+                                        <li><a class="logout" href="/logout" style="color:white"
+                                               target="_blank">Logout</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -129,7 +140,7 @@
                     <ul>
                         <li><a href="./">Home</a></li>
                         <li><a href="/about">About</a></li>
-                        <li class="active"><a href="/shop">Shop</a></li>
+                        <li><a href="/shop">Shop</a></li>
                         <li><a href="/shoping-cart">Cart</a></li>
                         <li><a href="/contact">Contact</a></li>
                         <li th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}"><a href="/admin-panel">Admin Panel</a></li>
@@ -147,13 +158,13 @@
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6">
                 <div class="breadcrumb__text">
-                    <h2>Shop</h2>
+                    <h2>Login Form</h2>
                 </div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6">
                 <div class="breadcrumb__links">
                     <a href="./">Home</a>
-                    <span>Shop</span>
+                    <span>Login form</span>
                 </div>
             </div>
         </div>
@@ -161,108 +172,41 @@
 </div>
 <!-- Breadcrumb End -->
 
-<!-- Shop Section Begin -->
-<section class="shop spad">
+<!-- Checkout Section Begin -->
+<section class="checkout spad">
     <div class="container">
-        <!--            <div class="shop__option">-->
-        <!--                <div class="row">-->
-        <!--                    <div class="col-lg-7 col-md-7">-->
-        <!--                        <div class="shop__option__search">-->
-        <!--                            <form action="#">-->
-        <!--                                <select>-->
-        <!--                                    <option value="">Categories</option>-->
-        <!--                                    <option value="">Red Velvet</option>-->
-        <!--                                    <option value="">Cup Cake</option>-->
-        <!--                                    <option value="">Biscuit</option>-->
-        <!--                                </select>-->
-        <!--                                <input type="text" placeholder="Search">-->
-        <!--                                <button type="submit"><i class="fa fa-search"></i></button>-->
-        <!--                            </form>-->
-        <!--                        </div>-->
-        <!--                    </div>-->
-        <!--                    <div class="col-lg-5 col-md-5">-->
-        <!--                        <div class="shop__option__right">-->
-        <!--                            <select>-->
-        <!--                                <option value="">Default sorting</option>-->
-        <!--                                <option value="">A to Z</option>-->
-        <!--                                <option value="">1 - 8</option>-->
-        <!--                                <option value="">Name</option>-->
-        <!--                            </select>-->
-        <!--                            <a href="#"><i class="fa fa-list"></i></a>-->
-        <!--                            <a href="#"><i class="fa fa-reorder"></i></a>-->
-        <!--                        </div>-->
-        <!--                    </div>-->
-        <!--                </div>-->
-        <!--            </div>-->
-
-        <!-- Item List Begin -->
-        <div class="row" th:if="${not #lists.isEmpty(shopList)}">
-            <div class="col-lg-3 col-md-6 col-sm-6" th:each="shop : ${shopList}">
-                <div class="product__item">
-                    <div class="product__item__pic set-bg" th:attr="data-setbg=${'img/upload/item'+shop.id+'/'+#strings.arraySplit(shop.itemImage, '|')[0]}">
-                        <!--"@{${'/img/shop/' + shop.image}}"-->
-                        <div class="product__label">
-                            <span>Cupcake</span>
+        <div class="checkout__form">
+            <form th:action="@{/login}" method="post">
+                <div class="checkout__order" style="text-align: center;">
+                    <h6 class="coupon__code" style="text-align: center; margin-bottom: 10px;"><span><i class="bi bi-pencil-square"></i></span>&nbsp;Please enter your
+                        login details below.</h6>
+                    <p style="text-align: center; margin-bottom: 20px;">Don't have an account? No worries, you can <a href="/registration" class="item-link">register here</a>!</p>
+                    <h6 class="checkout__title" style="text-align: center;">Login</h6>
+                    <div th:if="${param.error}">
+                        <div style="color: red; text-align: center; margin-bottom: 10px; margin-top: 5px;">
+                            Invalid email or password.
                         </div>
                     </div>
-                    <div class="product__item__text">
-                        <h6>
-                            <!--                                href="/shop-details" http://localhost:8080/shop?page=1#-->
-                            <a th:href="@{/shop-details(id=${shop.id})}" th:text="${shop.itemName}"></a></h6>
-                        <div class="product__item__price" th:text="${shop.itemPrice}"></div>
-                        <div class="cart_add">
-                            <a th:href="@{/shop-details(id=${shop.id})}">Check details</a>
+                    <div th:if="${param.logout}">
+                        <div style="color: #f14305; text-align: center; margin-bottom: 10px; margin-top: 5px;">
+                            You have been logged out.
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <!-- Item List End -->
-
-        <div class="shop__last__option">
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                    <!-- Pagination -->
-                    <nav class="shop__pagination">
-                        <ul class="pagination">
-                            <!--                                <li class="page-item">-->
-                            <!--                                    <a class="page-link" th:href="@{/?page=1}">-->
-                            <!--                                        <span aria-hidden="true">First</span>-->
-                            <!--                                    </a>-->
-                            <!--                                </li>-->
-                            <li>
-                                <a th:href="@{?page={page}(page = ${pagination.prevBlock})}">
-                                    <span class="arrow_carrot-left"></span>
-                                </a>
-                            </li>
-                            <th:block th:with="start = ${pagination.startPage}, end = ${pagination.lastPage}">
-                                <li
-                                        th:with="start = ${pagination.startPage}, end = ${pagination.lastPage}"
-                                        th:each="pageButton : ${#numbers.sequence(start, end)}">
-                                    <a th:href="@{?page={page}(page = ${pageButton})}" th:text="${pageButton}"></a>
-                                </li>
-                            </th:block>
-                            <li>
-                                <a th:href="@{?page={page} (page = ${pagination.nextBlock})}">
-                                    <span class="arrow_carrot-right"></span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-
-
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div class="shop__last__text">
-                        <span>Current page  </span>
-                        <span th:text="${pagination.page}"></span>
+                    <div class="checkout__input" style="text-align: center;">
+                        <p>Email<span>*</span></p>
+                        <input type="email" name="username" placeholder="Email" required style="max-width: 50%;">
                     </div>
+                    <div class="checkout__input" style="text-align: center;">
+                        <p>Password<span>*</span></p>
+                        <input type="password" name="password" placeholder="Password" required style="max-width: 50%;">
+                    </div>
+                    <button type="submit" class="site-btn" id="log-in-btn" style="max-width: 50%; margin: auto;">LOG IN</button>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 </section>
-<!-- Shop Section End -->
+<!-- Checkout Section End -->
 
 <!-- Footer Section Begin -->
 <footer class="footer set-bg" data-setbg="img/footer-bg.jpg">
@@ -344,15 +288,16 @@
 <!-- Search End -->
 
 <!-- Js Plugins -->
-<script src="../../js/jquery-3.3.1.min.js"></script>
-<script src="../../js/bootstrap.min.js"></script>
-<script src="../../js/jquery.nice-select.min.js"></script>
-<script src="../../js/jquery.barfiller.js"></script>
-<script src="../../js/jquery.magnific-popup.min.js"></script>
-<script src="../../js/jquery.slicknav.js"></script>
-<script src="../../js/owl.carousel.min.js"></script>
-<script src="../../js/jquery.nicescroll.min.js"></script>
-<script src="../../js/main.js"></script>
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.nice-select.min.js"></script>
+<script src="js/jquery.barfiller.js"></script>
+<script src="js/jquery.magnific-popup.min.js"></script>
+<script src="js/jquery.slicknav.js"></script>
+<script src="js/owl.carousel.min.js"></script>
+<script src="js/jquery.nicescroll.min.js"></script>
+<script src="js/main.js"></script>
+<script src="js/custom.js"></script>
 </body>
 
 </html>

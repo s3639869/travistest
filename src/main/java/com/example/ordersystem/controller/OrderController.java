@@ -54,11 +54,20 @@ public class OrderController {
         List<Cart> cartList = cartService.getAllCarts(user);
         model.addAttribute("cartItems", cartList);
 
+        float cartSum = 0;
+        int cartQty = 0;
+        cartQty = cartList.size();
+        for (Cart cart : cartList) {
+            cartSum += cart.getSmallSum();
+        }
+        model.addAttribute("cartSum",cartSum);
+        model.addAttribute("cartQty",cartQty);
+
         return "checkout";
     }
     
     @PostMapping("/checkout/add")
-    public String addShopToCart() {
+    public String addItemToCart() {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Account loggedInAcc = (Account)auth.getPrincipal();
@@ -69,24 +78,24 @@ public class OrderController {
         return "redirect:/shoping-cart";
     }
     
-    @RequestMapping(value="/checkout/orderlist", method=RequestMethod.GET)
+    @RequestMapping(value="/orderlist", method=RequestMethod.GET)
     public String showOrderList(ModelMap model){
         List<Order> orderList = orderService.getAllOrders();
         model.addAttribute("orderList",orderList);
         return "orderlist";
     }
     
-    @RequestMapping(value="checkout/orderlist/confirm-order/{id}", method= RequestMethod.GET)
+    @RequestMapping(value="orderlist/confirm-order/{id}", method= RequestMethod.GET)
     public String confirmorder(@PathVariable Long id){
     	Account user = accountService.getAccountById(id);
         orderService.confirmOrder(user);
-        return "redirect:/checkout/orderlist";
+        return "redirect:/orderlist";
     }
 
-    @RequestMapping(value="checkout/orderlist/unconfirm-order/{id}", method= RequestMethod.GET)
+    @RequestMapping(value="orderlist/unconfirm-order/{id}", method= RequestMethod.GET)
     public String unconfirmOrder(@PathVariable Long id){
     	Account user = accountService.getAccountById(id);
         orderService.unconfirmOrder(user);
-        return "redirect:/checkout/orderlist";
+        return "redirect:/orderlist";
     }
 }
