@@ -30,7 +30,7 @@ import java.util.Properties;
 //@EnableWebMvc
 @EnableJpaRepositories("com.example.ordersystem.repository")
 @ComponentScan(basePackages = {"com.example.ordersystem"})
-@EntityScan("com.example.ordersystem.model")
+//@EntityScan("com.example.ordersystem.model")
 public class AppConfig implements WebMvcConfigurer {
     @Bean
     public Student student(){
@@ -45,11 +45,6 @@ public class AppConfig implements WebMvcConfigurer {
     @Bean
     public Item item() {
         return new Item();
-    }
-
-    @Bean
-    public Cart cart() {
-        return new Cart();
     }
 
     /*@Override
