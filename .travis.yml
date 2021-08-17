@@ -18,7 +18,6 @@ addons:
             - postgresql-client-common
             - postgresql-common
 env:
-   PGPORT: "5432"
    PGVERSION: 12
 #env:
 #  global:
