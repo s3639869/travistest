@@ -9,7 +9,7 @@ before_install:
 jdk: openjdk11
 os:
   - linux
-#dist: trusty
+dist: xenial
 addons:
     postgresql: "12"
  #   apt:
@@ -33,5 +33,5 @@ before_script:
 install:
  - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 script:
- - mvn test -B
+# - mvn test -B
 
