@@ -8,20 +8,18 @@ jdk: openjdk11
 os:
   - linux
 dist: xenial
-matrix:
-  include:
-      - addons:
-        postgresql: "12"
-        apt:
-          packages:
+addons:
+    postgresql: "12"
+    apt:
+      packages:
             - postgresql-12
             - postgresql-client-12
             - postgresql-server-dev-12
             - postgresql-client-common
             - postgresql-common
-      env:
-        PGPORT: "5433"
-        PGVERSION: 12
+env:
+   PGPORT: "5433"
+   PGVERSION: 12
 #env:
 #  global:
 #  - PGPORT=5433
