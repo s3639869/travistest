@@ -1,5 +1,6 @@
 package com.example.ordersystem.config;
 
+import com.example.ordersystem.model.Cart;
 import com.example.ordersystem.model.Item;
 import com.example.ordersystem.model.Student;
 import com.example.ordersystem.model.Teacher;
@@ -46,10 +47,10 @@ public class AppConfig implements WebMvcConfigurer {
         return new Item();
     }
     
-    /*@Bean
+    @Bean
     public Cart cart() {
         return new Cart();
-    }*/
+    }
 
     /*@Override
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {
