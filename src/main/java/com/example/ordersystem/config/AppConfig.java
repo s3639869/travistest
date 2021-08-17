@@ -47,6 +47,11 @@ public class AppConfig implements WebMvcConfigurer {
         return new Item();
     }
 
+    @Bean
+    public Cart cart() {
+        return new Cart();
+    }
+
     /*@Override
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/static/**")
