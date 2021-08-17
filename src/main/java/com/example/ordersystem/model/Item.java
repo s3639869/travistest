@@ -9,10 +9,10 @@ import java.util.Set;
 @Entity
 @Table(name="items")
 public class Item {
-    @SequenceGenerator(name ="item_sequence", sequenceName = "item_sequence", allocationSize = 1)
+
     @Id
     @Column
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "item_sequence")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column
