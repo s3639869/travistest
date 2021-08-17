@@ -43,6 +43,11 @@ public class AppConfig implements WebMvcConfigurer {
     public Item item() {
         return new Item();
     }
+    
+    @Bean
+    public Cart cart() {
+        return new Cart();
+    }
 
     /*@Override
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {
