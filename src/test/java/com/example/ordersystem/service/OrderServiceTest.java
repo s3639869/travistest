@@ -1,7 +1,9 @@
 package com.example.ordersystem.service;
 
 import com.example.ordersystem.model.*;
+import com.example.ordersystem.repository.AccountRepository;
 import com.example.ordersystem.repository.CartRepository;
+import com.example.ordersystem.repository.ItemRepository;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,12 +14,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import com.example.ordersystem.repository.OrderRepository;
+import org.springframework.util.FileSystemUtils;
 
 import javax.transaction.Transactional;
 
 import static org.junit.Assert.*;
 
+import java.io.File;
 import java.math.BigDecimal;
+import java.nio.file.Paths;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
@@ -42,6 +47,12 @@ public class OrderServiceTest {
     
     @Autowired
     private ItemService itemService;
+
+	@Autowired
+	private ItemRepository itemRepository;
+
+	@Autowired
+	private AccountRepository accountRepository;
     
     @Before
     public void setUp() throws Exception {
@@ -51,12 +62,16 @@ public class OrderServiceTest {
     @After
     public void tearDown() throws Exception {
         orderRepository.deleteAll();
+        cartRepository.deleteAll();
+        itemRepository.deleteAll();
+        accountRepository.deleteAll();
+		FileSystemUtils.deleteRecursively(Paths.get("target\\classes\\static\\img\\upload".replace("\\", File.separator)).toFile());
     }
     
 	@Test
 	public void testAddOrder() {
 		Account testUser1 = new Account("Mike", "Dean", "123 Testing Lane", "0903682439", "test@gmail.com", "password", AccountRole.USER);
-		Item testItem1 = new Item("testCake1", "First test", "product-1.jpg", new BigDecimal("11.00"));
+		Item testItem1 = new Item("testCake1", "First test", "product-1.jpg", new BigDecimal("11.00"),"Cake",true);
 		accountService.signUpAccount(testUser1);
 		itemService.saveItem(testItem1);
         cartService.addItem(testItem1.getId(), 5, testUser1);
@@ -68,7 +83,7 @@ public class OrderServiceTest {
 	@Test
 	public void testConfirmOrder() {
 		Account testUser1 = new Account("Mike", "Dean", "123 Testing Lane", "0903682439", "test@gmail.com", "password", AccountRole.USER);
-		Item testItem1 = new Item("testCake1", "First test", "product-1.jpg", new BigDecimal("11.00"));
+		Item testItem1 = new Item("testCake1", "First test", "product-1.jpg", new BigDecimal("11.00"),"Cake",true);
 		accountService.signUpAccount(testUser1);
 		itemService.saveItem(testItem1);
         cartService.addItem(testItem1.getId(), 5, testUser1);
@@ -87,7 +102,7 @@ public class OrderServiceTest {
 	@Test
 	public void testUnconfirmOrder() {
 		Account testUser1 = new Account("Mike", "Dean", "123 Testing Lane", "0903682439", "test@gmail.com", "password", AccountRole.USER);
-		Item testItem1 = new Item("testCake1", "First test", "product-1.jpg", new BigDecimal("11.00"));
+		Item testItem1 = new Item("testCake1", "First test", "product-1.jpg", new BigDecimal("11.00"),"Cake",true);
 		accountService.signUpAccount(testUser1);
 		itemService.saveItem(testItem1);
         cartService.addItem(testItem1.getId(), 5, testUser1);
@@ -110,9 +125,9 @@ public class OrderServiceTest {
 		accountService.signUpAccount(testUser1);
 		Account testUser2 = new Account("Alley", "Cat", "112 Testing Lane", "0933684439", "test2@gmail.com", "password2", AccountRole.USER);
 		accountService.signUpAccount(testUser2);
-		Item testItem1 = new Item("testCake1", "First test", "product-1.jpg", new BigDecimal("11.00"));
+		Item testItem1 = new Item("testCake1", "First test", "product-1.jpg", new BigDecimal("11.00"),"Cake",true);
 		itemService.saveItem(testItem1);
-		Item testItem2 = new Item("testCake2", "Second test", "product-2.jpg", new BigDecimal("12.00"));
+		Item testItem2 = new Item("testCake2", "Second test", "product-2.jpg", new BigDecimal("12.00"),"Cake",true);
         itemService.saveItem(testItem2);
         cartService.addItem(testItem1.getId(), 5, testUser1);
 		orderService.addOrder(testUser1);
