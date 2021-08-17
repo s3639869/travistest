@@ -1,29 +1,25 @@
 language: java
-before_install:
-  - chmod +x mvnw
+#before_install:
+#  - chmod +x mvnw
+jdk: openjdk11
 os:
   - linux
-dist: trusty
+dist: xenial
 sudo: enabled
 addons:
-  postgresql: "12"
-  apt:
-    packages:
-    - postgresql-12
-    - postgresql-client-12
-env:
-  global:
-  - PGPORT=5433
-  - PGUSER=travis
+  postgresql: "10"
+#env:
+#  global:
+#  - PGPORT=5433
+#  - PGUSER=travis
 before_script:
-  - psql -c 'create database cosc2101;' -U postgres -p 5433
+  - psql -c 'create database cosc2101;' -U postgres
   - sudo -u postgres psql -c "ALTER ROLE postgres WITH password 'super123'"
 services:
   - postgresql
 install:
- - mvn -N io.takari:maven:wrapper
- - ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
-script:
- - mvn clean verify
+ - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+#script:
+# - mvn clean verify
 
 
