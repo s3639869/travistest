@@ -29,12 +29,12 @@ public class Cart {
 
     private int amount;
 
+    public Cart(){}
 
     @Transient
     public float getSmallSum() {
         return  this.item.getItemPrice().floatValue() * amount;
     }
-
 
     public Long getId() {
         return id;
