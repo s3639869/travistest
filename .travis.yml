@@ -1,6 +1,7 @@
 language: java
 before_install:
   - chmod +x mvnw
+  - sudo chmod +r pg_hba.conf
 #  - mkdir /etc/postgresql/12/main/pg_hba.conf
 #  - "if [ ! -z $PGVERSION ]; then sudo cp /etc/postgresql/{9.6,$PGVERSION}/main/pg_hba.conf; fi"
 #  - "if [ ! -z $PGVERSION ]; then sudo service postgresql restart $PGVERSION; fi"
