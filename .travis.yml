@@ -32,7 +32,7 @@ before_script:
   - sudo -u postgres psql -c "ALTER ROLE postgres WITH password 'super123'"
 #install:
 # - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
-script:
+#script:
 # - mvn test -B
 #  - mvn clean verify
 
