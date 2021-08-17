@@ -1,11 +1,11 @@
 language: java
 before_install:
   - chmod +x mvnw
-  - pg_ctl -D /usr/local/var/postgres start
+  - sudo service postgresql start
 #  - mkdir /etc/postgresql/12/main/pg_hba.conf
 #  - "if [ ! -z $PGVERSION ]; then sudo cp /etc/postgresql/{9.6,$PGVERSION}/main/pg_hba.conf; fi"
 #  - "if [ ! -z $PGVERSION ]; then sudo service postgresql restart $PGVERSION; fi"
-sudo: true
+#sudo: true
 jdk: openjdk11
 os:
   - linux
