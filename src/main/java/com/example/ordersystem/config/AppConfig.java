@@ -46,11 +46,6 @@ public class AppConfig implements WebMvcConfigurer {
     public Item item() {
         return new Item();
     }
-    
-    @Bean
-    public Cart cart() {
-        return new Cart();
-    }
 
     /*@Override
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {
@@ -71,7 +66,7 @@ public class AppConfig implements WebMvcConfigurer {
 
         LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
 
-        sessionFactoryBean.setPackagesToScan("com/example/OrderSystem/model");
+        sessionFactoryBean.setPackagesToScan("com.example.OrderSystem.model");
 
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("org.postgresql.Driver");
