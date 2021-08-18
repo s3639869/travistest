@@ -2,9 +2,12 @@ language: java
 before_install:
   - chmod +x mvnw
   - sudo service postgresql start
-#  - mkdir /etc/postgresql/12/main/pg_hba.conf
-#  - "if [ ! -z $PGVERSION ]; then sudo cp /etc/postgresql/{9.6,$PGVERSION}/main/pg_hba.conf; fi"
-#  - "if [ ! -z $PGVERSION ]; then sudo service postgresql restart $PGVERSION; fi"
+  - sudo apt-get update
+  - sudo apt-get --yes remove postgresql\*
+  - sudo apt-get install -y postgresql-12 postgresql-client-12
+  - sudo cp /etc/postgresql/{9.6,12}/main/pg_hba.conf
+  - sudo service postgresql restart 12
+
 #sudo: enabled
 jdk: openjdk11
 os:
@@ -21,10 +24,10 @@ addons:
  #           - postgresql-common
 #env:
 #   PGVERSION: 12
-#env:
-#  global:
-#  - PGPORT=5433
-#  - PGUSER=travis
+env:
+  global:
+    - PGUSER=postgres
+    - PGPORT=5432
 services:
   - postgresql
 before_script:
