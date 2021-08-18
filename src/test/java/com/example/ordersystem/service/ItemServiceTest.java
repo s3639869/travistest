@@ -15,10 +15,10 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 //Reset auto-generated ID back to 1 for accurate testing environment
-/*@SqlGroup({
-        @Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD, statements="CREATE TABLE IF NOT EXISTS items(); TRUNCATE items RESTART IDENTITY CASCADE"),
-        @Sql(executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD, statements="CREATE TABLE IF NOT EXISTS items(); TRUNCATE items RESTART IDENTITY CASCADE")
-})*/
+@SqlGroup({
+        @Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD, statements="TRUNCATE items RESTART IDENTITY CASCADE"),
+        @Sql(executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD, statements="TRUNCATE items RESTART IDENTITY CASCADE")
+})
 @SpringBootTest
 public class ItemServiceTest {
     @Autowired
