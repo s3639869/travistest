@@ -39,8 +39,8 @@ before_script:
 #  - psql -f 'create_table.sql -d cosc2101;' -U postgres
 #install:
 # - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
-script:
-  - psql -c "SELECT version();" -U postgres
+#script:
+#  - psql -c "SELECT version();" -U postgres
 # - mvn test -B
 #  - mvn clean verify
 
