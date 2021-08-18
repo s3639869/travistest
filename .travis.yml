@@ -28,11 +28,9 @@ addons:
 services:
   - postgresql
 before_script:
-#  - psql -c 'create database cosc2101;' -U postgres
-#  - sudo -u postgres psql -c "ALTER ROLE postgres WITH password 'super123'"
-  - psql --command="CREATE DATABASE cosc2101 WITH OWNER = postgres;"
-  - psql --command="ALTER ROLE postgres WITH password 'super123';"
-  - psql --dbname=cosc2101 --file=create_table.sql
+  - psql -c 'create database cosc2101;' -U postgres
+  - sudo -u postgres psql -c "ALTER ROLE postgres WITH password 'super123'"
+  - psql -f 'create_table.sql -d cosc2101;' -U postgres
 #install:
 # - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 #script:
