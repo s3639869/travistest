@@ -1,12 +1,15 @@
 language: java
 before_install:
   - chmod +x mvnw
-  - sudo service postgresql start
-  - sudo apt-get update
-  - sudo apt-get --yes remove postgresql\*
-  - sudo apt-get install -y postgresql-11 postgresql-client-11
-  - sudo cp /etc/postgresql/{9.6,11}/main/pg_hba.conf
-  - sudo service postgresql restart 11
+  - sudo sed -i 's/port = 5433/port = 5432/' /etc/postgresql/12/main/postgresql.conf
+  - sudo cp /etc/postgresql/{9.6,12}/main/pg_hba.conf
+  - sudo pg_ctlcluster 12 main restart
+#  - sudo service postgresql start
+#  - sudo apt-get update
+#  - sudo apt-get --yes remove postgresql\*
+#  - sudo apt-get install -y postgresql-11 postgresql-client-11
+#  - sudo cp /etc/postgresql/{9.6,11}/main/pg_hba.conf
+#  - sudo service postgresql restart 11
 
 #sudo: enabled
 jdk: openjdk11
@@ -14,25 +17,25 @@ os:
   - linux
 #dist: xenial
 addons:
-    postgresql: "11"
- #   apt:
- #     packages:
- #           - postgresql-12
- #           - postgresql-client-12
+#    postgresql: "11"
+   apt:
+     packages:
+           - postgresql-12
+           - postgresql-client-12
  #           - postgresql-server-dev-12
  #           - postgresql-client-common
  #           - postgresql-common
 #env:
 #   PGVERSION: 12
-env:
-  global:
-    - PGUSER=postgres
-    - PGPORT=5432
-services:
-  - postgresql
+#env:
+#  global:
+#    - PGUSER=postgres
+#    - PGPORT=5432
+#services:
+#  - postgresql
 before_script:
   - psql -c "CREATE DATABASE cosc2101;" -U postgres
-  - sudo -u postgres psql -c "ALTER ROLE postgres WITH password 'super123'"
+  - psql -c "ALTER ROLE postgres WITH password 'super123';" -U postgres
 #  - psql -f 'create_table.sql -d cosc2101;' -U postgres
 #install:
 # - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
