@@ -34,7 +34,7 @@ before_script:
 #install:
 # - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 script:
-  - psql -c "SELECT version();"
+  - psql -c "SELECT version();" -U postgres
 # - mvn test -B
 #  - mvn clean verify
 
