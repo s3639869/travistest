@@ -28,7 +28,7 @@ addons:
 services:
   - postgresql
 before_script:
-  - psql -c 'create database cosc2101;' -U postgres
+  - psql -c 'CREATE DATABASE cosc2101;' -U postgres
   - sudo -u postgres psql -c "ALTER ROLE postgres WITH password 'super123'"
 #  - psql -f 'create_table.sql -d cosc2101;' -U postgres
 #install:
