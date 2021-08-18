@@ -30,10 +30,11 @@ services:
 before_script:
   - psql -c 'create database cosc2101;' -U postgres
   - sudo -u postgres psql -c "ALTER ROLE postgres WITH password 'super123'"
-  - psql -f 'create_table.sql -d cosc2101;' -U postgres
+#  - psql -f 'create_table.sql -d cosc2101;' -U postgres
 #install:
 # - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
-#script:
+script:
+  - psql -c "SELECT version();"
 # - mvn test -B
 #  - mvn clean verify
 
